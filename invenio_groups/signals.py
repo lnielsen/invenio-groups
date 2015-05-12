@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of Invenio.
-# Copyright (C) 2014, 2015 CERN.
+# Copyright (C) 2015 CERN.
 #
 # Invenio is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
@@ -17,23 +17,13 @@
 # along with Invenio; if not, write to the Free Software Foundation, Inc.,
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
 
-"""Group bundles."""
+"""Groups module signals."""
 
 from __future__ import absolute_import, print_function, unicode_literals
 
-from invenio.base.bundles import invenio as _i, jquery as _j
-from invenio.ext.assets import Bundle, RequireJSFilter
+from blinker import Namespace
+_signals = Namespace()
 
-js = Bundle(
-    'js/groups/init.js',
-    filters=RequireJSFilter(exclude=[_j, _i]),
-    output="groups.js",
-    weight=50
-)
+group_created = _signals.signal('group_created')
 
-styles = Bundle(
-    "css/groups/groups.less",
-    filters="less,cleancss",
-    output="groups.css",
-    weight=50
-)
+group_deleted = _signals.signal('group_deleted')

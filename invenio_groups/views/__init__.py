@@ -17,23 +17,11 @@
 # along with Invenio; if not, write to the Free Software Foundation, Inc.,
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
 
-"""Group bundles."""
+"""Define groups views."""
 
-from __future__ import absolute_import, print_function, unicode_literals
+from .settings import blueprint as groups_settings_blueprint
 
-from invenio.base.bundles import invenio as _i, jquery as _j
-from invenio.ext.assets import Bundle, RequireJSFilter
 
-js = Bundle(
-    'js/groups/init.js',
-    filters=RequireJSFilter(exclude=[_j, _i]),
-    output="groups.js",
-    weight=50
-)
-
-styles = Bundle(
-    "css/groups/groups.less",
-    filters="less,cleancss",
-    output="groups.css",
-    weight=50
-)
+blueprints = [
+    groups_settings_blueprint,
+]

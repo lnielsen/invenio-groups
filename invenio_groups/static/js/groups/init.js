@@ -1,6 +1,6 @@
 /*
  * This file is part of Invenio.
- * Copyright (C) 2014 CERN.
+ * Copyright (C) 2014, 2015 CERN.
  *
  * Invenio is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,7 +18,29 @@
  */
 
 require([
-  'js/remote.autocomplete.field'
-], function(autocomplete) {
-  autocomplete.attachTo($('input.remote-typeahead-widget'))
-})
+  'jquery',
+  'js/groups/decorated/main',
+  'js/groups/form'
+], function (
+  DecoratedArea,
+  NewMemberForm
+) {
+  'use strict';
+
+  var config = {
+    placeholder: "Start typing or past emails here..."
+  };
+
+  // DecoratedArea.attachTo('#emails', config);
+  // NewMemberForm.attachTo('#new_member_form');
+
+  $('.table tr').click(function (ev) {
+    if (this.children.length > 0) {
+      var data = this.children[0].dataset;
+      if (data.groupId) {
+        window.location.href = "./" + data.groupId;
+      }
+    }
+  });
+
+});
